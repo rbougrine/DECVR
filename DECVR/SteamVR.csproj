@@ -209,6 +209,7 @@
     <Compile Include="Assets\SteamVR\Plugins\openvr_api.cs" />
     <Compile Include="Assets\SteamVR\Scripts\ActionTest.cs" />
     <Compile Include="Assets\SteamVR\Scripts\ControllerGrabObject.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Behaviour.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Camera.cs" />
