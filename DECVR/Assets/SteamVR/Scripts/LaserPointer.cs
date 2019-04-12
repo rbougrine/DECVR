@@ -77,12 +77,13 @@ public class LaserPointer : MonoBehaviour
     }
 
     private void Teleport()
-    {
-        
+    {        
         shouldTeleport = false;
         reticle.SetActive(false);
+
         Vector3 difference = cameraRigTransform.position - headTransform.position;
         difference.y = 0;
+        hitPoint.y = cameraRigTransform.position.y;
         cameraRigTransform.position = hitPoint + difference;
     }
 
