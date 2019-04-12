@@ -21,6 +21,7 @@ public class LaserPointer : MonoBehaviour
     public Transform headTransform;
     public Vector3 teleportReticleOffset;
     public LayerMask teleportMask;
+    public Transform rejectedTeleport;
     private bool shouldTeleport;
 
     // Start is called before the first frame update
@@ -40,21 +41,25 @@ public class LaserPointer : MonoBehaviour
         {
             RaycastHit hit;
 
-
             if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, teleportMask))
             {
                 hitPoint = hit.point;
                 ShowLaser(hit);
+            }
+            
+              if (hit.transform.gameObject.layer != 9)
+              {
+                shouldTeleport = false;
+                teleportReticleTransform = rejectedTeleport;
             }
         }
         else 
         {
             laser.SetActive(false);
             reticle.SetActive(false);
-
         }
 
-        if (teleportAction.GetStateUp(handType) && shouldTeleport)
+        if (teleportAction.GetStateUp(handType) && shouldTeleport )
         {
             Teleport();
         }
