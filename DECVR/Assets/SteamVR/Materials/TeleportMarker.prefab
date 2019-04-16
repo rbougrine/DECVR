@@ -304,7 +304,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6335184007494696697}
-  - component: {fileID: 6335184007501429535}
   m_Layer: 0
   m_Name: TeleportMarker
   m_TagString: Untagged
@@ -328,24 +327,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &6335184007501429535
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6335184007494591193}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 6a7295a4a414c1a46b0bcfcb1588642c, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 6a7295a4a414c1a46b0bcfcb1588642c, type: 3}
-  - {fileID: 7400002, guid: 6a7295a4a414c1a46b0bcfcb1588642c, type: 3}
-  - {fileID: 7400004, guid: 6a7295a4a414c1a46b0bcfcb1588642c, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &6335184007494591195
 GameObject:
   m_ObjectHideFlags: 0
