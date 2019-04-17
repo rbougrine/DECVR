@@ -18,6 +18,8 @@ public class ActionTest : MonoBehaviour
     {
         return grabAction.GetState(handType);
     }
+
+
     // Update is called once per frame
     void Update()
     {

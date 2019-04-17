@@ -8,36 +8,46 @@ public class LaserPointer : MonoBehaviour
     public SteamVR_Input_Sources handType;
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean teleportAction;
+    public SteamVR_Action_Boolean grabAction;
 
-    public GameObject laserPrefab; 
-    private GameObject laser;
-    private Transform laserTransform; 
+    public GameObject WalkingLaserPrefab;
+    public GameObject InteractionLaserPrefab;
+    private GameObject WalkingLaser;
+    private GameObject InteractionLaser;
+    private Transform WalkingLaserTransform;
+    private Transform InteractionLaserTransform;
     private Vector3 hitPoint;
 
 
     public Transform cameraRigTransform;
-    public GameObject teleportReticlePrefab;
-    public GameObject rejectedTeleport;
-    private GameObject reticle;
-    private GameObject teleportCylinder;
-    private Transform teleportReticleTransform;
-    private Transform teleportCylinderTransform;
+    public GameObject teleportReticleGreenPrefab;
+    public GameObject teleportReticleRedPrefab;
+    private GameObject reticleGreen;
+    private GameObject reticleRed;
+    private Transform teleportReticleGreenTransform;
+    private Transform teleportReticleRedTransform;
     public Transform headTransform;
     public Vector3 teleportReticleOffset;
     public LayerMask teleportMask;
     private bool shouldTeleport;
 
+
+    private Transform seenObject;
+
     // Start is called before the first frame update
     void Start()
     {
-        laser = Instantiate(laserPrefab);
-        laserTransform = laser.transform;
+        WalkingLaser = Instantiate(WalkingLaserPrefab);
+        WalkingLaserTransform = WalkingLaser.transform;
 
-        reticle = Instantiate(teleportReticlePrefab);
-        teleportReticleTransform = reticle.transform;
+        InteractionLaser = Instantiate(InteractionLaserPrefab);
+        InteractionLaserTransform = InteractionLaser.transform;
 
-        teleportCylinder = Instantiate(rejectedTeleport);
-        teleportCylinderTransform = teleportCylinder.transform;
+        reticleGreen = Instantiate(teleportReticleGreenPrefab);
+        teleportReticleGreenTransform = reticleGreen.transform;
+
+        reticleRed = Instantiate(teleportReticleRedPrefab);
+        teleportReticleRedTransform = reticleRed.transform;
 
     }
 
@@ -51,14 +61,41 @@ public class LaserPointer : MonoBehaviour
             if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, teleportMask))
             {
                 hitPoint = hit.point;
-                ShowLaser(hit);
+                ShowLaser(hit, WalkingLaser, WalkingLaserTransform);
+                checkTeleport(hit);
             }
         }
         else 
         {
-            laser.SetActive(false);
-            reticle.SetActive(false);
-            teleportCylinder.SetActive(false);
+            WalkingLaser.SetActive(false);
+            reticleGreen.SetActive(false);
+            reticleRed.SetActive(false);
+        }
+
+        if (grabAction.GetState(handType))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
+            {
+                hitPoint = hit.point;
+                ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
+                seenObject = hit.collider.gameObject.transform;
+
+                if (seenObject.parent.name == "doorPivot")
+                {
+                    GameObject door = GameObject.Find("doorPivot");
+                    decDoor decdoor = door.GetComponent<decDoor>();
+                    
+                     StartCoroutine(decdoor.DoorMovement());
+                }
+
+            }
+           
+        }
+        else
+        {
+            InteractionLaser.SetActive(false);
         }
 
         if (teleportAction.GetStateUp(handType) && shouldTeleport )
@@ -68,7 +105,7 @@ public class LaserPointer : MonoBehaviour
 
     }
 
-    private void ShowLaser(RaycastHit hit)
+    private void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
     {
         
         laser.SetActive(true);
@@ -78,27 +115,33 @@ public class LaserPointer : MonoBehaviour
                                                 laserTransform.localScale.y,
                                                 hit.distance);
 
+    }
+
+    private void checkTeleport(RaycastHit hit)
+    {
         if (hit.collider.gameObject.tag == "cantTeleport")
         {
-            reticle.SetActive(false);
-            teleportCylinder.SetActive(true);
+            reticleGreen.SetActive(false);
+            reticleRed.SetActive(true);
             shouldTeleport = false;
-            teleportCylinderTransform.position = hitPoint + teleportReticleOffset;
+            teleportReticleRedTransform.position = hitPoint + teleportReticleOffset;
         }
         else
         {
-            teleportCylinder.SetActive(false);
-            reticle.SetActive(true);
-            teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+            reticleRed.SetActive(false);
+            reticleGreen.SetActive(true);
+            teleportReticleGreenTransform.position = hitPoint + teleportReticleOffset;
             shouldTeleport = true;
         }
+
+
 
     }
 
     private void Teleport()
     {        
         shouldTeleport = false;
-        reticle.SetActive(false);
+        reticleGreen.SetActive(false);
 
         Vector3 difference = cameraRigTransform.position - headTransform.position;
         difference.y = 0;
