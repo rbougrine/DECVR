@@ -12,7 +12,7 @@ public class decDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,22 +21,34 @@ public class decDoor : MonoBehaviour
 
     }
 
+    public void DoorChoise()
+    {
+        
+        if (doorisClosed)
+        {
+            Debug.Log("OpenDoor");
+            StartCoroutine(DoorMovement("OpenDoor"));
+            doorisClosed = false;
+        }
+        else
+        {
+            Debug.Log("CloseDoor");
+            StartCoroutine(DoorMovement("CloseDoor"));
+            doorisClosed = true;
+        }
+
+
+    }
+
     /// <summary>
-    /// Opens and closes the door automatically.
+    /// Opens the door.
     /// </summary>
     /// <returns>An IEnumerator value</returns>
 
-    public IEnumerator DoorMovement()
+    private IEnumerator DoorMovement(string DoorAction)
     {
-            if (doorisClosed == true)
-            {
-                    animator.Play("OpenDoor");
-                    doorisClosed = false;
-                    yield return new WaitForSeconds(100);
-                    animator.Play("closeDoor");
-                    doorisClosed = true;
-
-            }
+            animator.Play(DoorAction);
+            yield return new WaitForSeconds(5);
     }
     
 }

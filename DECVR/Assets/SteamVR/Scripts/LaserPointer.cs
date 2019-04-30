@@ -30,6 +30,7 @@ public class LaserPointer : MonoBehaviour
     public Vector3 teleportReticleOffset;
     public LayerMask teleportMask;
     private bool shouldTeleport;
+    private int grabSensitivity;
 
 
     private Transform seenObject;
@@ -81,13 +82,17 @@ public class LaserPointer : MonoBehaviour
                 hitPoint = hit.point;
                 ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
                 seenObject = hit.collider.gameObject.transform;
+                grabSensitivity += 1;
+                
 
-                if (seenObject.parent.name == "doorPivot")
+                if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
                 {
                     GameObject door = GameObject.Find("doorPivot");
                     decDoor decdoor = door.GetComponent<decDoor>();
-                    
-                     StartCoroutine(decdoor.DoorMovement());
+
+                    decdoor.DoorChoise();
+                    grabSensitivity = 0;
+
                 }
 
             }
