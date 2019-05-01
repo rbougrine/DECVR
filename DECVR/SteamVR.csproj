@@ -212,6 +212,7 @@
     <Compile Include="Assets\SteamVR\Scripts\decDoor.cs" />
     <Compile Include="Assets\SteamVR\Scripts\Laser.cs" />
     <Compile Include="Assets\SteamVR\Scripts\LaserPointer.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\Printer.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Behaviour.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Camera.cs" />

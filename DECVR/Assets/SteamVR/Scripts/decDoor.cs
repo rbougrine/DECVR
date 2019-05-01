@@ -26,13 +26,11 @@ public class decDoor : MonoBehaviour
         
         if (doorisClosed)
         {
-            Debug.Log("OpenDoor");
             StartCoroutine(DoorMovement("OpenDoor"));
             doorisClosed = false;
         }
         else
         {
-            Debug.Log("CloseDoor");
             StartCoroutine(DoorMovement("CloseDoor"));
             doorisClosed = true;
         }

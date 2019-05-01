@@ -94,6 +94,18 @@ public class LaserPointer : MonoBehaviour
                     grabSensitivity = 0;
 
                 }
+                Debug.Log(seenObject.name);
+                if (seenObject.parent.name == "3dprinter" && grabSensitivity > 20)
+                {
+                    GameObject cartridge = GameObject.Find("cartridge");
+                    Printer Cartridge = cartridge.GetComponent<Printer>();
+
+                    StartCoroutine(Cartridge.Print(4, 1F));
+                    grabSensitivity = 0;
+                    
+                }
+
+
 
             }
            
@@ -131,15 +143,13 @@ public class LaserPointer : MonoBehaviour
             shouldTeleport = false;
             teleportReticleRedTransform.position = hitPoint + teleportReticleOffset;
         }
-        else
+        else 
         {
             reticleRed.SetActive(false);
             reticleGreen.SetActive(true);
             teleportReticleGreenTransform.position = hitPoint + teleportReticleOffset;
             shouldTeleport = true;
         }
-
-
 
     }
 
