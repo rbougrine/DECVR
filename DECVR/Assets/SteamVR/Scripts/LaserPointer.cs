@@ -29,6 +29,7 @@ public class LaserPointer : MonoBehaviour
     public Transform headTransform;
     public Vector3 teleportReticleOffset;
     public LayerMask teleportMask;
+    public LayerMask interactionMask;
     private bool shouldTeleport;
     private int grabSensitivity;
 
@@ -49,7 +50,6 @@ public class LaserPointer : MonoBehaviour
 
         reticleRed = Instantiate(teleportReticleRedPrefab);
         teleportReticleRedTransform = reticleRed.transform;
-
     }
 
     // Update is called once per frame
@@ -66,25 +66,19 @@ public class LaserPointer : MonoBehaviour
                 checkTeleport(hit);
             }
         }
-        else 
-        {
-            WalkingLaser.SetActive(false);
-            reticleGreen.SetActive(false);
-            reticleRed.SetActive(false);
-        }
 
         if (grabAction.GetState(handType))
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
+            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, interactionMask))
             {
                 hitPoint = hit.point;
                 ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
                 seenObject = hit.collider.gameObject.transform;
                 grabSensitivity += 1;
-                
 
+           
                 if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
                 {
                     GameObject door = GameObject.Find("doorPivot");
@@ -94,9 +88,10 @@ public class LaserPointer : MonoBehaviour
                     grabSensitivity = 0;
 
                 }
-                Debug.Log(seenObject.name);
-                if (seenObject.parent.name == "3dprinter" && grabSensitivity > 20)
+                
+                if (seenObject.name == "3dprinter" && grabSensitivity > 20)
                 {
+                    Debug.Log(seenObject.name);
                     GameObject cartridge = GameObject.Find("cartridge");
                     Printer Cartridge = cartridge.GetComponent<Printer>();
 

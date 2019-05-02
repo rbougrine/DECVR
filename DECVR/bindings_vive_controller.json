@@ -124,7 +124,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/grab"
+                     "output" : "/actions/default/in/grabpinch"
                   }
                },
                "mode" : "button",
@@ -133,7 +133,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/grab"
+                     "output" : "/actions/default/in/grabpinch"
                   }
                },
                "mode" : "button",
@@ -205,7 +205,7 @@
       }
    },
    "controller_type" : "vive_controller",
-   "description" : "",
+   "description" : "tst",
    "name" : "vive_controller",
    "options" : {},
    "simulated_actions" : []

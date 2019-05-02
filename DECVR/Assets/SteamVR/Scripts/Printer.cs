@@ -18,8 +18,8 @@ public class Printer : MonoBehaviour
         paintBallGun.SetActive(false);
 
         anim = GetComponent<Animator>();
-        animator = GetComponent<Animator>();
-        StartCoroutine(Print(4, 1F));
+       
+       
     }
 
     // Update is called once per frame
@@ -48,8 +48,12 @@ public class Printer : MonoBehaviour
             printMagic.SetActive(true);
             yield return new WaitForSeconds(time);
         }
-        printMagic.SetActive(false);
-        animator.Play("Extracting");  
+
+        GameObject printResult = GameObject.Find("printResult");
+        printObject printobject = printResult.GetComponent<printObject>();
+
+        printobject.printOutcome();
+
     }
 
 
