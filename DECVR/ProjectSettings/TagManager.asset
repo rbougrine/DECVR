@@ -19,7 +19,7 @@ TagManager:
   - canTeleport
   - cantTeleport
   - canInteract
-  - 
+  - canGrab
   - 
   - 
   - 

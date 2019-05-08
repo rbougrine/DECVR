@@ -10,12 +10,14 @@ public class Printer : MonoBehaviour
     public Animator animator;
     public GameObject printMagic;
     public GameObject paintBallGun;
+    private bool printed;
 
     // Start is called before the first frame update
     void Start()
     {
         printMagic.SetActive(false);
         paintBallGun.SetActive(false);
+        printed = true;
 
         anim = GetComponent<Animator>();
        
@@ -41,11 +43,12 @@ public class Printer : MonoBehaviour
 
     public IEnumerator Print(int n, float time)
     {
-        while (n > 0)
+        while (n > 0 && printed)
         {
             anim.Play("Printing", -1, 0F);
             --n;
             printMagic.SetActive(true);
+            printed = false;
             yield return new WaitForSeconds(time);
         }
 
@@ -55,18 +58,4 @@ public class Printer : MonoBehaviour
         printobject.printOutcome();
 
     }
-
-
-    /*
-    private IEnumerable printCube()
-    {
-        yield return new WaitForSeconds(5);
-    }
-
-    private IEnumerable printBall()
-    {
-        yield return new WaitForSeconds(5);
-    }
-    */
-
 }

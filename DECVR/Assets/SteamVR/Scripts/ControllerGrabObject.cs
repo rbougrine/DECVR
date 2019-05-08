@@ -9,8 +9,8 @@ public class ControllerGrabObject : MonoBehaviour
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean grabAction;
 
-    private GameObject collidingObject; // 1
-    private GameObject objectInHand; // 2
+    private GameObject collidingObject; 
+    public GameObject objectInHand; 
 
     private void SetCollidingObject(Collider col)
     {
@@ -86,16 +86,14 @@ public class ControllerGrabObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
         if (grabAction.GetLastStateDown(handType))
-        {
+        {          
             if (collidingObject)
             {
                 GrabObject();
             }
         }
 
-     
         if (grabAction.GetLastStateUp(handType))
         {
             if (objectInHand)
