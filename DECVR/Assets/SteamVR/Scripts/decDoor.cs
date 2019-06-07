@@ -21,7 +21,7 @@ public class decDoor : MonoBehaviour
 
     }
 
-    public void DoorChoise()
+    public void DoorChoose()
     {
         
         if (doorisClosed)

@@ -207,10 +207,8 @@
     <Compile Include="Assets\SteamVR\InteractionSystem\Teleport\Scripts\TeleportMarkerBase.cs" />
     <Compile Include="Assets\SteamVR\InteractionSystem\Teleport\Scripts\TeleportPoint.cs" />
     <Compile Include="Assets\SteamVR\Plugins\openvr_api.cs" />
-    <Compile Include="Assets\SteamVR\Scripts\ActionTest.cs" />
     <Compile Include="Assets\SteamVR\Scripts\ControllerGrabObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\decDoor.cs" />
-    <Compile Include="Assets\SteamVR\Scripts\Laser.cs" />
     <Compile Include="Assets\SteamVR\Scripts\LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Scripts\Printer.cs" />
     <Compile Include="Assets\SteamVR\Scripts\printObject.cs" />
@@ -239,7 +237,6 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedCamera.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
-    <Compile Include="Assets\SteamVR\Scripts\testScript.cs" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />

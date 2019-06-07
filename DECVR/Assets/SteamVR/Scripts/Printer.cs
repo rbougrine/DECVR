@@ -9,15 +9,14 @@ public class Printer : MonoBehaviour
     public Animator anim;
     public Animator animator;
     public GameObject printMagic;
-    public GameObject paintBallGun;
-    private bool printed;
+    public string wantedItem;
+    private bool print;
 
     // Start is called before the first frame update
     void Start()
     {
         printMagic.SetActive(false);
-        paintBallGun.SetActive(false);
-        printed = true;
+        print = true;
 
         anim = GetComponent<Animator>();
        
@@ -32,30 +31,29 @@ public class Printer : MonoBehaviour
 
     }
 
-    public void AlertObservers(string message)
+    public void chosenObject()
     {
-        if (message.Equals("AnimationEnded"))
-        {
-            paintBallGun.SetActive(true);
-        }
-    }
+        //get info from UI screen and set var 
 
+
+        //wantedItem = ;
+    }
 
     public IEnumerator Print(int n, float time)
     {
-        while (n > 0 && printed)
+        while (n > 0 && print)
         {
             anim.Play("Printing", -1, 0F);
             --n;
             printMagic.SetActive(true);
-            printed = false;
+            print = false;
             yield return new WaitForSeconds(time);
         }
 
         GameObject printResult = GameObject.Find("printResult");
         printObject printobject = printResult.GetComponent<printObject>();
 
-        printobject.printOutcome();
+        printobject.printOutcome(wantedItem);
 
     }
 }

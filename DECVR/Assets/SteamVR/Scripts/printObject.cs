@@ -6,6 +6,11 @@ public class printObject : MonoBehaviour
 {
     public Animator animator;
     private GameObject printMagic;
+    public GameObject paintballGun;
+    public GameObject kubus;
+    public GameObject ball;
+    public string wantedItem;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +21,9 @@ public class printObject : MonoBehaviour
         Printer printer = cartridge.GetComponent<Printer>();
 
         printMagic = printer.printMagic;
+        //paintballGun.SetActive(false);
+        ball.SetActive(false);
+        kubus.SetActive(false);
 
     }
 
@@ -26,10 +34,26 @@ public class printObject : MonoBehaviour
     }
 
 
-    public void printOutcome()
+    public void printOutcome(string wantedItem)
     {
         printMagic.SetActive(false);
         animator.Play("Extracting");
+        printedItem(wantedItem);
+    }
 
+    public void printedItem(string wantedItem)
+    {
+        switch (wantedItem)
+        {
+            case "paintballGun":
+                paintballGun.SetActive(true);
+                break;
+            case "kubus":
+                kubus.SetActive(true);
+                break;
+            case "ball":
+                ball.SetActive(true);
+                break;
+        } 
     }
 }
