@@ -10,6 +10,7 @@ public class printObject : MonoBehaviour
     public GameObject kubus;
     public GameObject ball;
     public string wantedItem;
+    private bool printingFinished;
     
 
     // Start is called before the first frame update
@@ -19,40 +20,46 @@ public class printObject : MonoBehaviour
 
         GameObject cartridge = GameObject.Find("cartridge");
         Printer printer = cartridge.GetComponent<Printer>();
-
         printMagic = printer.printMagic;
-        //paintballGun.SetActive(false);
-        ball.SetActive(false);
-        kubus.SetActive(false);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
+    public void AlertObservers(string message)
+    {
+        if (message.Equals("AnimationEnded"))
+        {
+            printingFinished = true;
+        }
+    }
 
     public void printOutcome(string wantedItem)
     {
         printMagic.SetActive(false);
-        animator.Play("Extracting");
-        printedItem(wantedItem);
+
+       
+            printedItem(wantedItem);
+            printingFinished = false;
+        
     }
 
     public void printedItem(string wantedItem)
     {
+        Debug.Log(1);
         switch (wantedItem)
         {
             case "paintballGun":
-                paintballGun.SetActive(true);
+                Instantiate(paintballGun);
                 break;
             case "kubus":
-                kubus.SetActive(true);
+                Instantiate(kubus);
                 break;
             case "ball":
-                ball.SetActive(true);
+                Instantiate(ball);
                 break;
         } 
     }

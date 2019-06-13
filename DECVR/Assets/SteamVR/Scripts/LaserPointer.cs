@@ -3,95 +3,106 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-    public class LaserPointer : MonoBehaviour
+public class LaserPointer : MonoBehaviour
+{
+    public SteamVR_Input_Sources handType;
+    public SteamVR_Input_Sources chosenHand;
+    public SteamVR_Behaviour_Pose controllerPose;
+    public SteamVR_Action_Boolean teleportAction;
+    public SteamVR_Action_Boolean grabAction;
+    public SteamVR_Action_Boolean grabPickAction;
+    public LayerMask teleportMask;
+    public LayerMask interactionMask;
+    public LayerMask grabMask;
+
+    public GameObject WalkingLaserPrefab;
+    public GameObject InteractionLaserPrefab;
+    private GameObject WalkingLaser;
+    private GameObject InteractionLaser;
+    private Transform WalkingLaserTransform;
+    private Transform InteractionLaserTransform;
+    private Vector3 hitPoint;
+
+    public Transform cameraRigTransform;
+    public GameObject teleportReticleGreenPrefab;
+    public GameObject teleportReticleRedPrefab;
+
+    private GameObject reticleGreen;
+    private GameObject reticleRed;
+    private Transform teleportReticleGreenTransform;
+    private Transform teleportReticleRedTransform;
+    private Transform seenObject;
+
+    public Transform headTransform;
+    public Vector3 teleportReticleOffset;
+    private bool shouldTeleport;
+    private bool gunConnected;
+    private int grabSensitivity;
+
+    public GameObject paintBallGun;
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-        public SteamVR_Input_Sources handType;
-        public SteamVR_Behaviour_Pose controllerPose;
-        public SteamVR_Action_Boolean teleportAction;
-        public SteamVR_Action_Boolean grabAction;
-        public SteamVR_Action_Boolean grabPickAction;
-        public LayerMask teleportMask;
-        public LayerMask interactionMask;
-        public LayerMask grabMask;
+        WalkingLaser = Instantiate(WalkingLaserPrefab);
+        WalkingLaserTransform = WalkingLaser.transform;
 
-        public GameObject WalkingLaserPrefab;
-        public GameObject InteractionLaserPrefab;
-        private GameObject WalkingLaser;
-        private GameObject InteractionLaser;
-        private Transform WalkingLaserTransform;
-        private Transform InteractionLaserTransform;
-        private Vector3 hitPoint;
+        InteractionLaser = Instantiate(InteractionLaserPrefab);
+        InteractionLaserTransform = InteractionLaser.transform;
 
-        public Transform cameraRigTransform;
-        public GameObject teleportReticleGreenPrefab;
-        public GameObject teleportReticleRedPrefab;
+        reticleGreen = Instantiate(teleportReticleGreenPrefab);
+        teleportReticleGreenTransform = reticleGreen.transform;
 
-        private GameObject reticleGreen;
-        private GameObject reticleRed;
-        private Transform teleportReticleGreenTransform;
-        private Transform teleportReticleRedTransform;
-        private Transform seenObject;
+        reticleRed = Instantiate(teleportReticleRedPrefab);
+        teleportReticleRedTransform = reticleRed.transform;
 
-        public Transform headTransform;
-        public Vector3 teleportReticleOffset;
-        private bool shouldTeleport;
-        private int grabSensitivity;
+        //  paintBallGun = GameObject.Find("paintBallGun");
+        //  connectGun();
+    }
 
-        public GameObject paintBallGun;
-
-
-        // Start is called before the first frame update
-        void Start()
+    // Update is called once per frame
+    void Update()
+    {
+        //walking code
+        if (teleportAction.GetState(handType))
         {
-            WalkingLaser = Instantiate(WalkingLaserPrefab);
-            WalkingLaserTransform = WalkingLaser.transform;
+            RaycastHit hit;
 
-            InteractionLaser = Instantiate(InteractionLaserPrefab);
-            InteractionLaserTransform = InteractionLaser.transform;
-
-            reticleGreen = Instantiate(teleportReticleGreenPrefab);
-            teleportReticleGreenTransform = reticleGreen.transform;
-
-            reticleRed = Instantiate(teleportReticleRedPrefab);
-            teleportReticleRedTransform = reticleRed.transform;
-
-            //  paintBallGun = GameObject.Find("paintBallGun");
-            //  connectGun();
+            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, teleportMask))
+            {
+                hitPoint = hit.point;
+                ShowLaser(hit, WalkingLaser, WalkingLaserTransform);
+                checkTeleport(hit);
+            }
+        }
+        else
+        {
+            WalkingLaser.SetActive(false);
+            reticleGreen.SetActive(false);
+            reticleRed.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
+        if (teleportAction.GetStateUp(handType) && shouldTeleport)
         {
-            //walking code
-            if (teleportAction.GetState(handType))
-            {
-                RaycastHit hit;
+            Teleport();
+        }
 
-                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, teleportMask))
+        //interaction code
+        if (grabAction.GetState(handType))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, interactionMask))
+            {
+                if (gunConnected && chosenHand == handType)
                 {
-                    hitPoint = hit.point;
-                    ShowLaser(hit, WalkingLaser, WalkingLaserTransform);
-                    checkTeleport(hit);
+                    GameObject paint = GameObject.Find("paintballGun");
+                    paintBall paintBall = paint.GetComponent<paintBall>();
+
+                    paintBall.Shoot();
                 }
-            }
-            else
-            {
-                WalkingLaser.SetActive(false);
-                reticleGreen.SetActive(false);
-                reticleRed.SetActive(false);
-            }
-
-            if (teleportAction.GetStateUp(handType) && shouldTeleport)
-            {
-                Teleport();
-            }
-
-            //interaction code
-            if (grabAction.GetState(handType))
-            {
-                RaycastHit hit;
-
-                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, interactionMask))
+                else
                 {
                     hitPoint = hit.point;
 
@@ -122,7 +133,7 @@ using Valve.VR;
             {
                 InteractionLaser.SetActive(false);
             }
-
+        }
             //grab code
             if (grabPickAction.GetState(handType))
             {
@@ -142,6 +153,7 @@ using Valve.VR;
                 }
             }
         }
+    
 
         private void connectGun()
         {
@@ -188,3 +200,4 @@ using Valve.VR;
             cameraRigTransform.position = hitPoint + difference;
         }
     }
+
