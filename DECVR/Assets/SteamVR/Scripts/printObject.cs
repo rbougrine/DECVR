@@ -5,7 +5,6 @@ using UnityEngine;
 public class printObject : MonoBehaviour
 {
     public Animator animator;
-    private GameObject printMagic;
     public GameObject paintballGun;
     public GameObject kubus;
     public GameObject ball;
@@ -15,10 +14,6 @@ public class printObject : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
-        GameObject cartridge = GameObject.Find("cartridge");
-        Printer printer = cartridge.GetComponent<Printer>();
-        printMagic = printer.printMagic;
     }
 
     // Update is called once per frame
@@ -29,8 +24,6 @@ public class printObject : MonoBehaviour
 
     public void printedItem(string wantedItem)
     {
-        printMagic.SetActive(false);
-
         switch (wantedItem)
         {
             case "paintButton":
@@ -43,5 +36,13 @@ public class printObject : MonoBehaviour
                 Instantiate(ball).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
         } 
+    }
+
+    private void checkContact()
+    {
+
+
+
+
     }
 }

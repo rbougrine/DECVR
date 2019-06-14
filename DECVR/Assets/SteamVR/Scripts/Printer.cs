@@ -49,12 +49,15 @@ public class Printer : MonoBehaviour
             yield return new WaitForSeconds(time);
            
         }
-        animator.Play("Extracting");
-        yield return new WaitForSeconds(1F);
-        GameObject printResult = GameObject.Find("printResult");
-        printObject printobject = printResult.GetComponent<printObject>();
+            animator.Play("Extracting");
+            yield return new WaitForSeconds(1F);
+            printMagic.SetActive(false);
+
+            GameObject printResult = GameObject.Find("printResult");
+            printObject printobject = printResult.GetComponent<printObject>();
         
-        printobject.printedItem(wantedItem);
+            printobject.printedItem(wantedItem);
+            printingAllowed = true;
 
     }
 }

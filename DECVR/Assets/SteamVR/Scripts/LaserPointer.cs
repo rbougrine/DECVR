@@ -134,8 +134,7 @@ public class LaserPointer : MonoBehaviour
 
                     if (seenObject.parent.name == "printButtons" && grabSensitivity > 20)
                     {
-                        Debug.Log(seenObject.parent.name);
-                        Debug.Log(seenObject.name);
+
                         GameObject cartridge = GameObject.Find("cartridge");
                         Printer printer = cartridge.GetComponent<Printer>();
 
