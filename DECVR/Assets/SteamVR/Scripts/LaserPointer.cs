@@ -38,6 +38,8 @@ public class LaserPointer : MonoBehaviour
     private bool shouldTeleport;
     private bool gunConnected;
     private int grabSensitivity;
+    public AudioSource audioData;
+    public GameObject pcScreen;
 
     public GameObject paintBallGun;
 
@@ -95,6 +97,7 @@ public class LaserPointer : MonoBehaviour
 
             if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, interactionMask))
             {
+               
                 if (gunConnected && chosenHand == handType)
                 {
                     GameObject paint = GameObject.Find("paintballGun");
@@ -109,7 +112,8 @@ public class LaserPointer : MonoBehaviour
                     ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
                     seenObject = hit.collider.gameObject.transform;
                     grabSensitivity += 1;
-
+                    Debug.Log(seenObject.parent.name);
+                    Debug.Log(seenObject.name);
 
                     if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
                     {
@@ -121,21 +125,33 @@ public class LaserPointer : MonoBehaviour
                     }
                     if (seenObject.name == "3dprinter" && grabSensitivity > 20)
                     {
-                        GameObject cartridge = GameObject.Find("cartridge");
-                        Printer Cartridge = cartridge.GetComponent<Printer>();
+                        audioData = GetComponent<AudioSource>();
+                        audioData.Play(0);
+                        pcScreen.SetActive(true);
+                                                                                                                                     
+                        grabSensitivity = 0;
+                    }
 
-                        StartCoroutine(Cartridge.Print(8, 1F));
+                    if (seenObject.parent.name == "printButtons" && grabSensitivity > 20)
+                    {
+                        Debug.Log(seenObject.parent.name);
+                        Debug.Log(seenObject.name);
+                        GameObject cartridge = GameObject.Find("cartridge");
+                        Printer printer = cartridge.GetComponent<Printer>();
+
+                        printer.chosenObject(seenObject.name);
                         grabSensitivity = 0;
                     }
                 }
             }
-            else
-            {
-                InteractionLaser.SetActive(false);
-            }
+            
         }
-            //grab code
-            if (grabPickAction.GetState(handType))
+        else
+        {
+            InteractionLaser.SetActive(false);
+        }
+        //grab code
+        if (grabPickAction.GetState(handType))
             {
                 RaycastHit hit;
 

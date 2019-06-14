@@ -15,7 +15,6 @@ public class Printer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        printMagic.SetActive(false);
         printingAllowed = true;
 
         anim = GetComponent<Animator>();
@@ -23,9 +22,6 @@ public class Printer : MonoBehaviour
         printObject printobject = printResult.GetComponent<printObject>();
 
         animator = printobject.animator;
-     
-        // Test code
-        //StartCoroutine(Print(10, 4F));
     }
 
     // Update is called once per frame
@@ -36,12 +32,10 @@ public class Printer : MonoBehaviour
 
     }
 
-    public void chosenObject()
+    public void chosenObject(string chosenItem)
     {
-        //get info from UI screen and set var 
-
-
-        //wantedItem = ;
+         wantedItem = chosenItem;
+         StartCoroutine(Print(10, 4F));
     }
 
     public IEnumerator Print(int n, float time)
@@ -60,7 +54,7 @@ public class Printer : MonoBehaviour
         GameObject printResult = GameObject.Find("printResult");
         printObject printobject = printResult.GetComponent<printObject>();
         
-        printobject.printOutcome(wantedItem);
+        printobject.printedItem(wantedItem);
 
     }
 }

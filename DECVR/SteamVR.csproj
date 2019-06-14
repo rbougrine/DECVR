@@ -210,6 +210,7 @@
     <Compile Include="Assets\SteamVR\Scripts\ControllerGrabObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\decDoor.cs" />
     <Compile Include="Assets\SteamVR\Scripts\LaserPointer.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\paintBall.cs" />
     <Compile Include="Assets\SteamVR\Scripts\Printer.cs" />
     <Compile Include="Assets\SteamVR\Scripts\printObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR.cs" />

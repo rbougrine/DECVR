@@ -10,7 +10,6 @@ public class printObject : MonoBehaviour
     public GameObject kubus;
     public GameObject ball;
     public string wantedItem;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -28,25 +27,19 @@ public class printObject : MonoBehaviour
 
     }
 
-    public void printOutcome(string wantedItem)
+    public void printedItem(string wantedItem)
     {
         printMagic.SetActive(false);
 
-        printedItem(wantedItem);
-        
-    }
-
-    public void printedItem(string wantedItem)
-    {
         switch (wantedItem)
         {
-            case "paintballGun":
+            case "paintButton":
                 Instantiate(paintballGun);
                 break;
-            case "kubus":
+            case "kubusButton":
                 Instantiate(kubus).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
-            case "ball":
+            case "ballButton":
                 Instantiate(ball).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
         } 
