@@ -13,7 +13,7 @@ public class printObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -35,14 +35,6 @@ public class printObject : MonoBehaviour
             case "ballButton":
                 Instantiate(ball).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
-        } 
-    }
-
-    private void checkContact()
-    {
-
-
-
-
+        }
     }
 }

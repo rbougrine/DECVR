@@ -207,6 +207,7 @@
     <Compile Include="Assets\SteamVR\InteractionSystem\Teleport\Scripts\TeleportMarkerBase.cs" />
     <Compile Include="Assets\SteamVR\InteractionSystem\Teleport\Scripts\TeleportPoint.cs" />
     <Compile Include="Assets\SteamVR\Plugins\openvr_api.cs" />
+    <Compile Include="Assets\SteamVR\Scripts\collisionCheck.cs" />
     <Compile Include="Assets\SteamVR\Scripts\ControllerGrabObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\decDoor.cs" />
     <Compile Include="Assets\SteamVR\Scripts\LaserPointer.cs" />

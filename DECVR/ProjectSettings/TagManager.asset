@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cantTeleport
   - canTeleport
+  - printed
   layers:
   - Default
   - TransparentFX

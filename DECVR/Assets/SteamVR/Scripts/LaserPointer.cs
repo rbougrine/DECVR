@@ -111,44 +111,57 @@ public class LaserPointer : MonoBehaviour
 
                     ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
                     seenObject = hit.collider.gameObject.transform;
+
+                    GameObject door = GameObject.Find("doorPivot");
+                    decDoor decdoor = door.GetComponent<decDoor>();
+
+                    GameObject cartridge = GameObject.Find("printResult");
+                    Printer printer = cartridge.GetComponent<Printer>();
+                    
                     grabSensitivity += 1;
-                    Debug.Log(seenObject.parent.name);
-                    Debug.Log(seenObject.name);
 
                     if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
-                    {
-                        GameObject door = GameObject.Find("doorPivot");
-                        decDoor decdoor = door.GetComponent<decDoor>();
-
+                    {       
                         decdoor.DoorChoose();
                         grabSensitivity = 0;
                     }
+
                     if (seenObject.name == "3dprinter" && grabSensitivity > 20)
                     {
                         audioData = GetComponent<AudioSource>();
                         audioData.Play(0);
-                        pcScreen.SetActive(true);
-                                                                                                                                     
+
+
+                        if (printer.printingAllowed)
+                        {
+                            pcScreen.SetActive(true);
+                        }                                                                                                                                     
                         grabSensitivity = 0;
                     }
 
                     if (seenObject.parent.name == "printButtons" && grabSensitivity > 20)
                     {
 
-                        GameObject cartridge = GameObject.Find("cartridge");
-                        Printer printer = cartridge.GetComponent<Printer>();
-
-                        printer.chosenObject(seenObject.name);
+                        if (printer.printingAllowed)
+                        {
+                            printer.chosenObject(seenObject.name);
+                        }
+                        else
+                        {
+                            pcScreen.SetActive(false);
+                            printer.cantPrint.SetActive(true);
+                        }
                         grabSensitivity = 0;
                     }
                 }
             }
-            
+             
         }
         else
         {
             InteractionLaser.SetActive(false);
         }
+
         //grab code
         if (grabPickAction.GetState(handType))
             {

@@ -10,54 +10,53 @@ public class Printer : MonoBehaviour
     public Animator animator;
     public GameObject printMagic;
     public string wantedItem;
-    private bool printingAllowed;
+    public bool printingAllowed;
+    public GameObject cantPrint;
+    public bool emptyPrint;
 
     // Start is called before the first frame update
     void Start()
     {
         printingAllowed = true;
-
-        anim = GetComponent<Animator>();
-        GameObject printResult = GameObject.Find("printResult");
-        printObject printobject = printResult.GetComponent<printObject>();
-
-        animator = printobject.animator;
+        emptyPrint = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-     
-        
-
-    }
+  
+    } 
 
     public void chosenObject(string chosenItem)
     {
-         wantedItem = chosenItem;
-         StartCoroutine(Print(10, 4F));
+        wantedItem = chosenItem;
+
+        if (emptyPrint)
+        {
+            StartCoroutine(Print(10, 2F));
+        }
     }
 
     public IEnumerator Print(int n, float time)
     {
-        while (n > 0 && printingAllowed)
+        if (printingAllowed)
         {
-            anim.Play("Printing", -1, 0F);
-            --n;
-            printMagic.SetActive(true);
             printingAllowed = false;
+            anim.Play("Printing", -1, 0F);
+            printMagic.SetActive(true);
             yield return new WaitForSeconds(time);
-           
-        }
-            animator.Play("Extracting");
-            yield return new WaitForSeconds(1F);
-            printMagic.SetActive(false);
 
-            GameObject printResult = GameObject.Find("printResult");
-            printObject printobject = printResult.GetComponent<printObject>();
-        
-            printobject.printedItem(wantedItem);
-            printingAllowed = true;
+        }
+        animator.Play("Extracting");
+        yield return new WaitForSeconds(1F);
+
+        printMagic.SetActive(false);
+       
+        GameObject printResult = GameObject.Find("printResult");
+        printObject printobject = printResult.GetComponent<printObject>();
+
+        printobject.printedItem(wantedItem);
 
     }
+
 }
