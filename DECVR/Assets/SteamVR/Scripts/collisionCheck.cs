@@ -29,20 +29,26 @@ public class collisionCheck : MonoBehaviour
 
     public void OnCollisionExit(Collision col)
     {
+         if (col.gameObject.tag == "printed")
+         {
+            retract();
+         }
+    }
+
+    public void retract()
+    {
         GameObject controller = GameObject.Find("Controller (left)");
         LaserPointer laserPointer = controller.GetComponent<LaserPointer>();
 
         GameObject cartridge = GameObject.Find("printResult");
         Printer printer = cartridge.GetComponent<Printer>();
 
-        if (col.gameObject.tag == "printed")
-        {
-            printer.printingAllowed = true;
-            printer.animator.Play("Reverse");
-            printer.emptyPrint = true;
+        printer.printingAllowed = true;
+        printer.animator.Play("Reverse");
+        printer.emptyPrint = true;
 
-            printer.cantPrint.SetActive(false);
-            laserPointer.pcScreen.SetActive(true);
-        }
+        printer.cantPrint.SetActive(false);
+        laserPointer.pcScreen.SetActive(true);
+
     }
 }

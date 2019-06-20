@@ -58,9 +58,6 @@ public class LaserPointer : MonoBehaviour
 
         reticleRed = Instantiate(teleportReticleRedPrefab);
         teleportReticleRedTransform = reticleRed.transform;
-
-        //  paintBallGun = GameObject.Find("paintBallGun");
-        //  connectGun();
     }
 
     // Update is called once per frame
@@ -141,7 +138,6 @@ public class LaserPointer : MonoBehaviour
 
                     if (seenObject.parent.name == "printButtons" && grabSensitivity > 20)
                     {
-
                         if (printer.printingAllowed)
                         {
                             printer.chosenObject(seenObject.name);
@@ -167,27 +163,25 @@ public class LaserPointer : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, grabMask))
+                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
                 {
-                    GameObject controllerRight = GameObject.Find("Controller (right)");
-                    ControllerGrabObject controllerCode = controllerRight.GetComponent<ControllerGrabObject>();
+                        GameObject cartridge = GameObject.Find("printResult");
+                        Printer printer = cartridge.GetComponent<Printer>();
 
-                    paintBallGun = GameObject.Find("paintBallGun");
+                        ControllerGrabObject UsedController = controllerPose.GetComponent<ControllerGrabObject>();
 
-                    if (controllerCode.objectInHand == paintBallGun)
+                    if (UsedController.objectInHand.name == "paintBallGun(Clone)")
                     {
-                        connectGun();
+                        GameObject paint = GameObject.Find("paintBallGun(Clone)");
+                        collisionCheck check = paint.GetComponent<collisionCheck>();
+
+                        UsedController.objectInHand.SetActive(false);
+                        check.retract();
+
                     }
                 }
             }
         }
-    
-
-        private void connectGun()
-        {
-            paintBallGun.transform.position = new Vector3(controllerPose.transform.position.x, controllerPose.transform.position.y, controllerPose.transform.position.z);
-        }
-
 
         public void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
         {
