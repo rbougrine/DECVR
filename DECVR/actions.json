@@ -32,8 +32,8 @@
     },
     {
       "name": "/actions/default/in/Squeeze",
-      "type": "vector1",
-      "requirement": "optional"
+      "type": "boolean",
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/HeadsetOnHead",

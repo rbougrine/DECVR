@@ -11,6 +11,7 @@ public class LaserPointer : MonoBehaviour
     public SteamVR_Action_Boolean teleportAction;
     public SteamVR_Action_Boolean grabAction;
     public SteamVR_Action_Boolean grabPickAction;
+    public SteamVR_Action_Boolean squeezeAction;
     public LayerMask teleportMask;
     public LayerMask interactionMask;
     public LayerMask grabMask;
@@ -42,6 +43,7 @@ public class LaserPointer : MonoBehaviour
     public GameObject pcScreen;
 
     public GameObject paintBallGun;
+    public GameObject reverseBack;
 
 
     // Start is called before the first frame update
@@ -148,7 +150,7 @@ public class LaserPointer : MonoBehaviour
                             printer.cantPrint.SetActive(true);
                         }
                         grabSensitivity = 0;
-                    }
+                    }     
                 }
             }
              
@@ -160,7 +162,7 @@ public class LaserPointer : MonoBehaviour
 
         //grab code
         if (grabPickAction.GetState(handType))
-            {
+        {
                 RaycastHit hit;
 
                 if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
@@ -177,13 +179,51 @@ public class LaserPointer : MonoBehaviour
 
                         UsedController.objectInHand.SetActive(false);
                         check.retract();
-
+                        handWeapon(controllerPose);
                     }
+
+                if (UsedController.objectInHand.name == "reverseBack")
+                {
+                    GameObject hand = GameObject.Find(controllerPose.transform.GetChild(0).name);
+                    hand.SetActive(true);
+                    paintBallGun.SetActive(false);
+                    gunConnected = false;
+                    reverseBack.SetActive(false);
+                    grabSensitivity = 0;
+                }
+
+            }              
+        }
+    }
+
+        private void handWeapon(SteamVR_Behaviour_Pose controllerPose)
+        {
+            int children = controllerPose.transform.childCount;
+
+            for (int i = 0; i < children; ++i)
+            {
+                switch (controllerPose.transform.GetChild(i).name)
+                {
+                    case "rightHand":
+                        GameObject rightHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
+                        rightHand.SetActive(false);
+                        paintBallGun.SetActive(true);
+                        gunConnected = true;
+                        reverseBack.SetActive(true);
+                        break;
+                    case "leftHand":
+                        GameObject leftHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
+                        leftHand.SetActive(false);
+                        paintBallGun.SetActive(true);
+                        gunConnected = true;
+                        reverseBack.SetActive(true);
+                        break;
+
                 }
             }
         }
-
-        public void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
+ 
+    public void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
         {
             laser.SetActive(true);
             laserTransform.position = Vector3.Lerp(controllerPose.transform.position, hitPoint, .5f);
