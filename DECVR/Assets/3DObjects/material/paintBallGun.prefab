@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2106784094744988224}
   - component: {fileID: 2106784094744988227}
   - component: {fileID: 8456524625459644764}
+  - component: {fileID: 818323494342228357}
   m_Layer: 0
   m_Name: paintBallGun
   m_TagString: printed
@@ -31,6 +32,7 @@ Transform:
   m_LocalPosition: {x: -303.38, y: -35.885, z: 480.897}
   m_LocalScale: {x: 0.49057403, y: 0.1568407, z: 0.812435}
   m_Children:
+  - {fileID: 2307522706404892666}
   - {fileID: 2307522706404892632}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,6 +86,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7becd7151a234f4f8bfd25086f368d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &818323494342228357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106784094744988226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b72e172c5192d49a22471830a29148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrel: {fileID: 2307522706405245850}
+  projectilePrefab: {fileID: 3687444094851689767, guid: 835c05b446feb6b43b6bd116ccf7b8c4,
+    type: 3}
 --- !u!1 &2307522706405245824
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +903,6 @@ Transform:
   m_LocalPosition: {x: -0.05482197, y: 0.08740077, z: 0.03752606}
   m_LocalScale: {x: 0.7556915, y: 0.7556915, z: 0.7556915}
   m_Children:
-  - {fileID: 2307522706404892666}
   - {fileID: 2307522706404892622}
   - {fileID: 2307522706404892608}
   - {fileID: 2307522706404892662}
@@ -970,7 +986,7 @@ Transform:
   - {fileID: 2307522706404892628}
   - {fileID: 2307522706404892562}
   m_Father: {fileID: 2307522706404892660}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2307522706404089756
 MeshFilter:
@@ -1106,7 +1122,7 @@ GameObject:
   - component: {fileID: 2307522706404089824}
   - component: {fileID: 2307522706402991392}
   m_Layer: 0
-  m_Name: pCylinder4
+  m_Name: barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1119,12 +1135,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2307522706405245850}
-  m_LocalRotation: {x: 0.6881109, y: 0.6934271, z: 0.16279873, w: -0.13841566}
-  m_LocalPosition: {x: 0.167762, y: 0.04579482, z: -0.00049820304}
-  m_LocalScale: {x: 2.6067002, y: 2.1053388, z: 2.6067002}
+  m_LocalRotation: {x: 0.58243847, y: -0.36267197, z: -0.40095565, w: 0.6070165}
+  m_LocalPosition: {x: 0.11307569, y: -0.07530126, z: 0.41046676}
+  m_LocalScale: {x: 17.331272, y: 3.1350842, z: 8.591725}
   m_Children:
   - {fileID: 2307522706404892624}
-  m_Father: {fileID: 2307522706404892660}
+  m_Father: {fileID: 2106784094744988230}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2307522706404089824
@@ -1912,7 +1928,7 @@ Transform:
   m_Children:
   - {fileID: 2307522706404892626}
   m_Father: {fileID: 2307522706404892660}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2307522706404089846
 MeshFilter:
@@ -2470,7 +2486,7 @@ Transform:
   m_Children:
   - {fileID: 2307522706404892610}
   m_Father: {fileID: 2307522706404892660}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2307522706404089844
 MeshFilter:
@@ -2812,7 +2828,7 @@ Transform:
   m_Children:
   - {fileID: 2307522706404892656}
   m_Father: {fileID: 2106784094744988230}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -101.233}
 --- !u!1 &2307522706405245948
 GameObject:

@@ -1808,6 +1808,7 @@ GameObject:
   - component: {fileID: 1111013737895427520}
   - component: {fileID: 3961558316392238095}
   - component: {fileID: 4617614497706258842}
+  - component: {fileID: 96069925957714720}
   m_Layer: 0
   m_Name: paintBallGun
   m_TagString: Untagged
@@ -1859,6 +1860,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &96069925957714720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111013737895191008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b72e172c5192d49a22471830a29148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1111013737895191012
 GameObject:
   m_ObjectHideFlags: 0

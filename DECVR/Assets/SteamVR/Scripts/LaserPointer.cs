@@ -6,7 +6,6 @@ using Valve.VR;
 public class LaserPointer : MonoBehaviour
 {
     public SteamVR_Input_Sources handType;
-    public SteamVR_Input_Sources chosenHand;
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean teleportAction;
     public SteamVR_Action_Boolean grabAction;
@@ -45,6 +44,7 @@ public class LaserPointer : MonoBehaviour
     public GameObject paintBallGun;
     public GameObject reverseBack;
     public GameObject hand;
+    public GameObject usedWeapon;
 
 
     // Start is called before the first frame update
@@ -93,19 +93,9 @@ public class LaserPointer : MonoBehaviour
         //interaction code
         if (grabAction.GetState(handType))
         {
-            RaycastHit hit;
+                RaycastHit hit;
 
-            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100, interactionMask))
-            {
-               
-                if (gunConnected && chosenHand == handType)
-                {
-                    GameObject paint = GameObject.Find("paintballGun");
-                    paintBall paintBall = paint.GetComponent<paintBall>();
-
-                    paintBall.Shoot();
-                }
-                else
+                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
                 {
                     hitPoint = hit.point;
 
@@ -117,13 +107,21 @@ public class LaserPointer : MonoBehaviour
 
                     GameObject cartridge = GameObject.Find("printResult");
                     Printer printer = cartridge.GetComponent<Printer>();
-                    
+
                     grabSensitivity += 1;
 
-                    if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
-                    {       
-                        decdoor.DoorChoose();
+
+                    if (gunConnected && grabSensitivity > 20)
+                    {
+                        paintBall paintBall = usedWeapon.GetComponent<paintBall>();
+                        paintBall.Shoot(hit,controllerPose);
                         grabSensitivity = 0;
+                    }
+
+                    if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
+                    {
+                       decdoor.DoorChoose();
+                       grabSensitivity = 0;
                     }
 
                     if (seenObject.name == "3dprinter" && grabSensitivity > 20)
@@ -131,11 +129,11 @@ public class LaserPointer : MonoBehaviour
                         audioData = GetComponent<AudioSource>();
                         audioData.Play(0);
 
-
                         if (printer.printingAllowed)
                         {
                             pcScreen.SetActive(true);
-                        }                                                                                                                                     
+                        }
+
                         grabSensitivity = 0;
                     }
 
@@ -151,11 +149,9 @@ public class LaserPointer : MonoBehaviour
                             printer.cantPrint.SetActive(true);
                         }
                         grabSensitivity = 0;
-                    }     
+                    }
                 }
             }
-             
-        }
         else
         {
             InteractionLaser.SetActive(false);
@@ -175,6 +171,7 @@ public class LaserPointer : MonoBehaviour
 
                 if (UsedController.objectInHand.name == "paintBallGun(Clone)")
                 {
+                    usedWeapon = UsedController.objectInHand;
                     GameObject paint = GameObject.Find("paintBallGun(Clone)");
                     collisionCheck check = paint.GetComponent<collisionCheck>();
                     gunConnected = true;
