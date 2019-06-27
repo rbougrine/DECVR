@@ -44,6 +44,7 @@ public class LaserPointer : MonoBehaviour
 
     public GameObject paintBallGun;
     public GameObject reverseBack;
+    public GameObject hand;
 
 
     // Start is called before the first frame update
@@ -163,36 +164,36 @@ public class LaserPointer : MonoBehaviour
         //grab code
         if (grabPickAction.GetState(handType))
         {
-                RaycastHit hit;
+            RaycastHit hit;
 
-                if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
+            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
+            {
+                GameObject cartridge = GameObject.Find("printResult");
+                Printer printer = cartridge.GetComponent<Printer>();
+
+                ControllerGrabObject UsedController = controllerPose.GetComponent<ControllerGrabObject>();
+
+                if (UsedController.objectInHand.name == "paintBallGun(Clone)")
                 {
-                        GameObject cartridge = GameObject.Find("printResult");
-                        Printer printer = cartridge.GetComponent<Printer>();
+                    GameObject paint = GameObject.Find("paintBallGun(Clone)");
+                    collisionCheck check = paint.GetComponent<collisionCheck>();
+                    gunConnected = true;
 
-                        ControllerGrabObject UsedController = controllerPose.GetComponent<ControllerGrabObject>();
-
-                    if (UsedController.objectInHand.name == "paintBallGun(Clone)")
-                    {
-                        GameObject paint = GameObject.Find("paintBallGun(Clone)");
-                        collisionCheck check = paint.GetComponent<collisionCheck>();
-
-                        UsedController.objectInHand.SetActive(false);
-                        check.retract();
-                        handWeapon(controllerPose);
-                    }
+                    UsedController.objectInHand.SetActive(false);
+                    check.retract();
+                    handWeapon(controllerPose);
+                }
 
                 if (UsedController.objectInHand.name == "reverseBack")
                 {
-                    GameObject hand = GameObject.Find(controllerPose.transform.GetChild(0).name);
-                    hand.SetActive(true);
-                    paintBallGun.SetActive(false);
-                    gunConnected = false;
                     reverseBack.SetActive(false);
-                    grabSensitivity = 0;
+                    paintBallGun.SetActive(false);
+                    hand.SetActive(true);
+
+                    gunConnected = false;
                 }
 
-            }              
+            }
         }
     }
 
@@ -208,14 +209,12 @@ public class LaserPointer : MonoBehaviour
                         GameObject rightHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
                         rightHand.SetActive(false);
                         paintBallGun.SetActive(true);
-                        gunConnected = true;
                         reverseBack.SetActive(true);
                         break;
                     case "leftHand":
                         GameObject leftHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
                         leftHand.SetActive(false);
                         paintBallGun.SetActive(true);
-                        gunConnected = true;
                         reverseBack.SetActive(true);
                         break;
 
