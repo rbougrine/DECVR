@@ -5,7 +5,6 @@ using Valve.VR;
 
 public class decDoor : MonoBehaviour
 {
-    
     public Animator animator;
     private bool doorisClosed;
 
@@ -34,8 +33,6 @@ public class decDoor : MonoBehaviour
             StartCoroutine(DoorMovement("CloseDoor"));
             doorisClosed = true;
         }
-
-
     }
 
     /// <summary>
