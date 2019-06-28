@@ -24,8 +24,9 @@ public class paintBall : MonoBehaviour
     public void Shoot(RaycastHit hit, SteamVR_Behaviour_Pose controllerPose)
     {
         GameObject bullet = Instantiate(projectilePrefab) as GameObject;
+        bullet.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         bullet.transform.position = Vector3.Lerp(controllerPose.transform.position, hit.point, .5f);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = controllerPose.transform.forward * 20;
+        rb.velocity = controllerPose.transform.forward * 10;
     } 
 }

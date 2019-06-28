@@ -111,20 +111,30 @@ public class LaserPointer : MonoBehaviour
                     grabSensitivity += 1;
 
 
-                    if (gunConnected && grabSensitivity > 20)
+                    if (gunConnected && grabSensitivity > 30)
                     {
                         paintBall paintBall = usedWeapon.GetComponent<paintBall>();
                         paintBall.Shoot(hit,controllerPose);
                         grabSensitivity = 0;
                     }
 
-                    if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20)
+                    if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20 && !gunConnected)
+
                     {
                        decdoor.DoorChoose();
                        grabSensitivity = 0;
                     }
+                Debug.Log(seenObject.tag);
 
-                    if (seenObject.name == "3dprinter" && grabSensitivity > 20)
+                if (seenObject.tag == "screen" && grabSensitivity > 20 && !gunConnected)
+                {
+                    GameObject screen = GameObject.Find("diaScreen");
+                    infoScreen info = screen.GetComponent<infoScreen>();
+
+                    info.showScreen(hit.collider.gameObject);
+                }
+
+                if (seenObject.name == "3dprinter" && grabSensitivity > 20 && !gunConnected)
                     {
                         audioData = GetComponent<AudioSource>();
                         audioData.Play(0);
@@ -137,7 +147,7 @@ public class LaserPointer : MonoBehaviour
                         grabSensitivity = 0;
                     }
 
-                    if (seenObject.parent.name == "printButtons" && grabSensitivity > 20)
+                    if (seenObject.parent.name == "printButtons" && grabSensitivity > 20 && !gunConnected)
                     {
                         if (printer.printingAllowed)
                         {
@@ -219,14 +229,17 @@ public class LaserPointer : MonoBehaviour
             }
         }
  
-    public void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
+        public void ShowLaser(RaycastHit hit, GameObject laser, Transform laserTransform)
         {
-            laser.SetActive(true);
-            laserTransform.position = Vector3.Lerp(controllerPose.transform.position, hitPoint, .5f);
-            laserTransform.LookAt(hitPoint);
-            laserTransform.localScale = new Vector3(laserTransform.localScale.x,
-                                                    laserTransform.localScale.y,
-                                                    hit.distance);
+            if (!gunConnected)
+            {
+                laser.SetActive(true);
+                laserTransform.position = Vector3.Lerp(controllerPose.transform.position, hitPoint, .5f);
+                laserTransform.LookAt(hitPoint);
+                laserTransform.localScale = new Vector3(laserTransform.localScale.x,
+                                                                    laserTransform.localScale.y,
+                                                                    hit.distance);
+            }
         }
 
         private void checkTeleport(RaycastHit hit)
