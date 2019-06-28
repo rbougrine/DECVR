@@ -43,6 +43,8 @@ public class LaserPointer : MonoBehaviour
 
     public GameObject paintBallGun;
     public GameObject reverseBack;
+    public GameObject markers;
+    public GameObject rangeBoards;
     public GameObject hand;
     public GameObject usedWeapon;
 
@@ -102,9 +104,6 @@ public class LaserPointer : MonoBehaviour
                     ShowLaser(hit, InteractionLaser, InteractionLaserTransform);
                     seenObject = hit.collider.gameObject.transform;
 
-                    GameObject door = GameObject.Find("doorPivot");
-                    decDoor decdoor = door.GetComponent<decDoor>();
-
                     GameObject cartridge = GameObject.Find("printResult");
                     Printer printer = cartridge.GetComponent<Printer>();
 
@@ -119,32 +118,41 @@ public class LaserPointer : MonoBehaviour
                     }
 
                     if (seenObject.parent.name == "doorPivot" && grabSensitivity > 20 && !gunConnected)
-
                     {
-                       decdoor.DoorChoose();
-                       grabSensitivity = 0;
+                        GameObject door = GameObject.Find("doorPivot");
+                        decDoor decdoor = door.GetComponent<decDoor>();
+
+                        decdoor.DoorChoose();
+                        grabSensitivity = 0;
                     }
-                Debug.Log(seenObject.tag);
+
+                    if (seenObject.parent.name == "doorPivotTwo" && grabSensitivity > 20 && !gunConnected)
+                    {
+                        GameObject doorTwo = GameObject.Find("doorPivotTwo");
+                        decDoor decdoorTwo = doorTwo.GetComponent<decDoor>();
+
+                        decdoorTwo.DoorChoose();
+                        grabSensitivity = 0;
+                    }
 
                 if (seenObject.tag == "screen" && grabSensitivity > 20 && !gunConnected)
-                {
-                    GameObject screen = GameObject.Find("diaScreen");
-                    infoScreen info = screen.GetComponent<infoScreen>();
-
-                    info.showScreen(hit.collider.gameObject);
-                }
-
-                if (seenObject.name == "3dprinter" && grabSensitivity > 20 && !gunConnected)
                     {
-                        audioData = GetComponent<AudioSource>();
-                        audioData.Play(0);
+                        GameObject screen = GameObject.Find("diaScreen");
+                        infoScreen info = screen.GetComponent<infoScreen>();
+
+                        info.showScreen(hit.collider.gameObject);
+                    }
+
+                    if (seenObject.name == "3dprinter" && grabSensitivity > 20 && !gunConnected)
+                    {
+                       audioData = GetComponent<AudioSource>();
+                       audioData.Play(0);
 
                         if (printer.printingAllowed)
                         {
-                            pcScreen.SetActive(true);
+                          pcScreen.SetActive(true);
                         }
-
-                        grabSensitivity = 0;
+                          grabSensitivity = 0;
                     }
 
                     if (seenObject.parent.name == "printButtons" && grabSensitivity > 20 && !gunConnected)
@@ -194,6 +202,8 @@ public class LaserPointer : MonoBehaviour
                 if (UsedController.objectInHand.name == "reverseBack")
                 {
                     reverseBack.SetActive(false);
+                    markers.SetActive(false);
+                    rangeBoards.SetActive(false);
                     paintBallGun.SetActive(false);
                     hand.SetActive(true);
 
@@ -217,12 +227,16 @@ public class LaserPointer : MonoBehaviour
                         rightHand.SetActive(false);
                         paintBallGun.SetActive(true);
                         reverseBack.SetActive(true);
+                        markers.SetActive(true);
+                        rangeBoards.SetActive(true);
                         break;
                     case "leftHand":
                         GameObject leftHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
                         leftHand.SetActive(false);
                         paintBallGun.SetActive(true);
                         reverseBack.SetActive(true);
+                        markers.SetActive(true);
+                        rangeBoards.SetActive(true);
                         break;
 
                 }
