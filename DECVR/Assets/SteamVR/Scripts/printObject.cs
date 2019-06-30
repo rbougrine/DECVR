@@ -8,6 +8,7 @@ public class printObject : MonoBehaviour
     public GameObject paintballGun;
     public GameObject kubus;
     public GameObject ball;
+    public GameObject courtRing;
     public string wantedItem;
 
     // Start is called before the first frame update
@@ -33,6 +34,7 @@ public class printObject : MonoBehaviour
                 Instantiate(kubus).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
             case "ballButton":
+                courtRing.SetActive(true);
                 Instantiate(ball).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 break;
         }

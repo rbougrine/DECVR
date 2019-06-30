@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: ce673d33d47de544a8fabb6273d8ff73
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Lamp
+    100002: LampLOD1
+    100004: LampLOD2
+    100006: LampShade
+    100008: LampShadeLOD1
+    100010: LampShadeLOD2
+    100012: LightBulb
+    100014: LightBulbLOD1
+    100016: LightBulbLOD2
+    100018: PointLamp
+    100020: PointLampLOD1
+    100022: PointLampLOD2
+    100024: //RootNode
+    100026: RabbitFamily
+    100028: RabbitFamilyLOD1
+    100030: RabbitFamilyLOD2
+    100032: RabbitStraight
+    100034: RabbitStraightLOD1
+    100036: RabbitStraightLOD2
+    100038: RabbitTurned
+    100040: RabbitTurnedLOD1
+    100042: RabbitTurnedLOD2
+    400000: Lamp
+    400002: LampLOD1
+    400004: LampLOD2
+    400006: LampShade
+    400008: LampShadeLOD1
+    400010: LampShadeLOD2
+    400012: LightBulb
+    400014: LightBulbLOD1
+    400016: LightBulbLOD2
+    400018: PointLamp
+    400020: PointLampLOD1
+    400022: PointLampLOD2
+    400024: //RootNode
+    400026: RabbitFamily
+    400028: RabbitFamilyLOD1
+    400030: RabbitFamilyLOD2
+    400032: RabbitStraight
+    400034: RabbitStraightLOD1
+    400036: RabbitStraightLOD2
+    400038: RabbitTurned
+    400040: RabbitTurnedLOD1
+    400042: RabbitTurnedLOD2
+    2100000: Porcelin
+    2100002: Metal
+    2100004: WhitePaint
+    2100006: Emit
+    2100008: WhiteShade
+    2100010: PorcelinRaw
+    2100012: Material
+    2300000: Lamp
+    2300002: LampLOD1
+    2300004: LampLOD2
+    2300006: LampShade
+    2300008: LampShadeLOD1
+    2300010: LampShadeLOD2
+    2300012: LightBulb
+    2300014: LightBulbLOD1
+    2300016: LightBulbLOD2
+    2300018: RabbitFamily
+    2300020: RabbitFamilyLOD1
+    2300022: RabbitFamilyLOD2
+    2300024: RabbitStraight
+    2300026: RabbitStraightLOD1
+    2300028: RabbitStraightLOD2
+    2300030: RabbitTurned
+    2300032: RabbitTurnedLOD1
+    2300034: RabbitTurnedLOD2
+    3300000: Lamp
+    3300002: LampLOD1
+    3300004: LampLOD2
+    3300006: LampShade
+    3300008: LampShadeLOD1
+    3300010: LampShadeLOD2
+    3300012: LightBulb
+    3300014: LightBulbLOD1
+    3300016: LightBulbLOD2
+    3300018: RabbitFamily
+    3300020: RabbitFamilyLOD1
+    3300022: RabbitFamilyLOD2
+    3300024: RabbitStraight
+    3300026: RabbitStraightLOD1
+    3300028: RabbitStraightLOD2
+    3300030: RabbitTurned
+    3300032: RabbitTurnedLOD1
+    3300034: RabbitTurnedLOD2
+    4300000: RabbitFamilyLOD1
+    4300002: RabbitFamily
+    4300004: LampLOD2
+    4300006: LightBulbLOD2
+    4300008: LampShadeLOD2
+    4300010: LampLOD1
+    4300012: LampShadeLOD1
+    4300014: LightBulbLOD1
+    4300016: RabbitTurnedLOD2
+    4300018: RabbitFamilyLOD2
+    4300020: RabbitStraightLOD2
+    4300022: RabbitStraightLOD1
+    4300024: RabbitTurnedLOD1
+    4300026: RabbitTurned
+    4300028: Lamp
+    4300030: LightBulb
+    4300032: LampShade
+    4300034: RabbitStraight
+    10800000: PointLamp
+    10800002: PointLampLOD1
+    10800004: PointLampLOD2
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

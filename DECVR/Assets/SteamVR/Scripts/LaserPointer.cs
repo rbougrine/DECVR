@@ -45,6 +45,7 @@ public class LaserPointer : MonoBehaviour
     public GameObject reverseBack;
     public GameObject markers;
     public GameObject rangeBoards;
+    public GameObject gameInfo;
     public GameObject hand;
     public GameObject usedWeapon;
 
@@ -204,6 +205,7 @@ public class LaserPointer : MonoBehaviour
                     reverseBack.SetActive(false);
                     markers.SetActive(false);
                     rangeBoards.SetActive(false);
+                    gameInfo.SetActive(false);
                     paintBallGun.SetActive(false);
                     hand.SetActive(true);
 
@@ -229,6 +231,7 @@ public class LaserPointer : MonoBehaviour
                         reverseBack.SetActive(true);
                         markers.SetActive(true);
                         rangeBoards.SetActive(true);
+                        gameInfo.SetActive(true);
                         break;
                     case "leftHand":
                         GameObject leftHand = GameObject.Find(controllerPose.transform.GetChild(i).name);
@@ -237,6 +240,7 @@ public class LaserPointer : MonoBehaviour
                         reverseBack.SetActive(true);
                         markers.SetActive(true);
                         rangeBoards.SetActive(true);
+                        gameInfo.SetActive(true);
                         break;
 
                 }
