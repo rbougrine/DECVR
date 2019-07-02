@@ -110,8 +110,13 @@ public class LaserPointer : MonoBehaviour
 
                     grabSensitivity += 1;
 
+                    GameObject screen = GameObject.Find("diaScreen");
+                    infoScreen info = screen.GetComponent<infoScreen>();
 
-                    if (gunConnected && grabSensitivity > 30)
+                    info.showScreen(hit.collider.gameObject);
+
+
+                if (gunConnected && grabSensitivity > 30)
                     {
                         paintBall paintBall = usedWeapon.GetComponent<paintBall>();
                         paintBall.Shoot(hit,controllerPose);
@@ -136,13 +141,13 @@ public class LaserPointer : MonoBehaviour
                         grabSensitivity = 0;
                     }
 
-                if (seenObject.tag == "screen" && grabSensitivity > 20 && !gunConnected)
-                    {
-                        GameObject screen = GameObject.Find("diaScreen");
-                        infoScreen info = screen.GetComponent<infoScreen>();
+                    //if (seenObject.tag == "screen" && grabSensitivity > 20 && !gunConnected)
+                    //{
+                    //    GameObject screen = GameObject.Find("diaScreen");
+                    //    infoScreen info = screen.GetComponent<infoScreen>();
 
-                        info.showScreen(hit.collider.gameObject);
-                    }
+                    //    info.showScreen(hit.collider.gameObject);
+                    //}
 
                     if (seenObject.name == "3dprinter" && grabSensitivity > 20 && !gunConnected)
                     {

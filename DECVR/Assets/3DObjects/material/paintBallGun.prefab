@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrel: {fileID: 2307522706405245850}
-  projectilePrefab: {fileID: 3687444094851689767, guid: 835c05b446feb6b43b6bd116ccf7b8c4,
+  projectilePrefab: {fileID: 5939263696580252648, guid: d9f3e4abcdcbf704485269e32de427d1,
     type: 3}
 --- !u!1 &2307522706405245824
 GameObject:

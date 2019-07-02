@@ -5,30 +5,25 @@ using UnityEngine;
 public class bullEye : MonoBehaviour
 {
     public Animator animator;
+    public GameObject robot;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = robot.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "bullEye")
+        if (col.gameObject.name == "projectile(Clone)")
         {
-            Debug.Log("YASSSSS");
-          //  StartCoroutine(RobotMovement(""));
-        }
-        else if(col.gameObject.name == "Robot")
-        {
-            Debug.Log("Robot YASSSSS");
-            //  StartCoroutine(RobotMovement(""));
+            StartCoroutine(RobotMovement("dancing"));
         }
     }
 

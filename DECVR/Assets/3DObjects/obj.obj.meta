@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: 02489885e024b534fb60e7d48189c2c3
+guid: d0cc38bc9903bf14086a2e28926b79dc
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: 18905_Dutch_woman_V1_
-    100002: //RootNode
-    400000: 18905_Dutch_woman_V1_
-    400002: //RootNode
-    2100000: 18905_Dutch_woman_V1_Mat
-    2300000: 18905_Dutch_woman_V1_
-    3300000: 18905_Dutch_woman_V1_
-    4300000: 18905_Dutch_woman_V1_
+    100000: Basketball_1_43
+    100002: holder_1__1
+    100004: //RootNode
+    400000: Basketball_1_43
+    400002: holder_1__1
+    400004: //RootNode
+    2100000: Basketball_1_43Mat
+    2100002: holder_1__1Mat
+    2300000: Basketball_1_43
+    2300002: holder_1__1
+    3300000: Basketball_1_43
+    3300002: holder_1__1
+    4300000: Basketball_1_43
+    4300002: holder_1__1
   externalObjects: {}
   materials:
     importMaterials: 1

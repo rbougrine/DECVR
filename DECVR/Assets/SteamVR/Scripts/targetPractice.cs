@@ -28,8 +28,6 @@ public class targetPractice : MonoBehaviour
             Vector3 shotFired = col.transform.position;
             Color shotColor = col.gameObject.GetComponent<Renderer>().material.color;
             Destroy(col.gameObject);
-            Debug.Log(shotFired);
-            Debug.Log(shotColor);
             GameObject splash = Instantiate(splashPrefab) as GameObject;
             splash.transform.position = shotFired;
             splash.GetComponent<Renderer>().material.color = shotColor;

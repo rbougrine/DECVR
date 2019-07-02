@@ -7,7 +7,7 @@ public class infoScreen : MonoBehaviour
     public GameObject pepperScreen;
     public GameObject tvScreen;
     public GameObject diaScreen;
-
+    public GameObject robot;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +25,12 @@ public class infoScreen : MonoBehaviour
     {
         var objectName = screen.transform.name;
 
-        Debug.Log(objectName);
-
         switch (objectName)
         {
-            case "Robot":
+            case "RobotOne":
                 pepperScreen.SetActive(true);
+                robotShot robotScript = robot.GetComponent<robotShot>();
+                StartCoroutine(robotScript.RobotMovement("waving"));
                 break;
             case "smartTV":
                 tvScreen.SetActive(true);
@@ -40,7 +40,7 @@ public class infoScreen : MonoBehaviour
                 break;
         }
     }
-
+         
     public void removeScreen(GameObject screen)
     {
         screen.SetActive(false);
